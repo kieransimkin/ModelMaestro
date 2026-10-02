@@ -1,0 +1,112 @@
+name: Release ModelMaestro
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      AUTO_INSTALL: '0'
+      DEMO_MODE: '1'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Verify tag matches package version
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VERSION="$(node -p "require('./package.json').version")"
+          test "$TAG" = "$VERSION" || {
+            echo "Tag version $TAG does not match package.json version $VERSION" >&2
+            exit 1
+          }
+
+      - run: python -m pip install -r requirements.txt aiohttp
+      - run: python -m unittest discover -s tests -v
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm pack --dry-run
+
+  publish-npm:
+    needs: validate
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Publish to npm
+        run: npm publish --access public
+
+  github-release:
+    needs: validate
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build source archives
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          mkdir -p dist
+          git archive --format=tar.gz --prefix="modelmaestro-${VERSION}/" \
+            -o "dist/modelmaestro-${VERSION}.tar.gz" HEAD
+          git archive --format=zip --prefix="modelmaestro-${VERSION}/" \
+            -o "dist/modelmaestro-${VERSION}.zip" HEAD
+          sha256sum dist/* > dist/SHA256SUMS
+
+      - name: Attest release archives
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: 'dist/modelmaestro-*'
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "ModelMaestro $GITHUB_REF_NAME" \
+            --generate-notes \
+            dist/modelmaestro-*.tar.gz \
+            dist/modelmaestro-*.zip \
+            dist/SHA256SUMS
