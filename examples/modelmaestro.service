@@ -1,0 +1,27 @@
+# Example user service. Replace /absolute/path/modelmaestro with your checkout.
+# Run start.py once interactively to install app dependencies and read the token.
+# Save as ~/.config/systemd/user/modelmaestro.service, then:
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now modelmaestro
+# To continue after logout, your system must permit user lingering.
+[Unit]
+Description=ModelMaestro local inference workbench
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/absolute/path/modelmaestro
+ExecStart=/usr/bin/python3 /absolute/path/modelmaestro/start.py --skip-app-install
+Environment=HOST=127.0.0.1
+Environment=NEXT_TELEMETRY_DISABLED=1
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+KillMode=control-group
+UMask=0077
+# Node/npm must be on this service's PATH; nvm shell initialization is not run.
+# Add Environment=PATH=/path/to/node/bin:/usr/local/bin:/usr/bin:/bin if needed.
+
+[Install]
+WantedBy=default.target

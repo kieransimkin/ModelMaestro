@@ -1,0 +1,33 @@
+name: ModelMaestro checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.12']
+    env:
+      AUTO_INSTALL: '0'
+      DEMO_MODE: '1'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.txt aiohttp
+      - run: python -m unittest discover -s tests -v
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Preserve resolved frontend dependency lock
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-lock-py${{ matrix.python }}
+          path: package-lock.json

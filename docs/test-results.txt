@@ -1,0 +1,67 @@
+test_health_identity_and_launcher_readiness_agree (test_branding.BrandingTests.test_health_identity_and_launcher_readiness_agree) ... ok
+test_package_and_page_use_new_name (test_branding.BrandingTests.test_package_and_page_use_new_name) ... ok
+test_socket_example_preserves_legacy_environment_fallback (test_branding.BrandingTests.test_socket_example_preserves_legacy_environment_fallback) ... ok
+test_systemd_example_uses_new_path (test_branding.BrandingTests.test_systemd_example_uses_new_path) ... ok
+test_event_cursor_and_job_filter (test_core.DatabaseTests.test_event_cursor_and_job_filter) ... ok
+test_idempotency_and_conflict (test_core.DatabaseTests.test_idempotency_and_conflict) ... ok
+test_job_column_allowlist (test_core.DatabaseTests.test_job_column_allowlist) ... ok
+test_priority_and_future_jobs (test_core.DatabaseTests.test_priority_and_future_jobs) ... ok
+test_recover_interrupted_without_repeating (test_core.DatabaseTests.test_recover_interrupted_without_repeating) ... ok
+test_wal_and_persistence (test_core.DatabaseTests.test_wal_and_persistence) ... ok
+test_failed_load_leaves_no_active_model (test_core.EngineAndMCPTests.test_failed_load_leaves_no_active_model) ... ok
+test_length_truncated_llama_call_never_executes (test_core.EngineAndMCPTests.test_length_truncated_llama_call_never_executes) ... ok
+test_llama_native_tool_argument_fragments (test_core.EngineAndMCPTests.test_llama_native_tool_argument_fragments) ... ok
+test_mcp_approved_call_progress_and_binary_omission (test_core.EngineAndMCPTests.test_mcp_approved_call_progress_and_binary_omission) ... ok
+test_mcp_denied_call_never_reaches_server (test_core.EngineAndMCPTests.test_mcp_denied_call_never_reaches_server) ... ok
+test_mcp_invalid_arguments_never_prompt_or_execute (test_core.EngineAndMCPTests.test_mcp_invalid_arguments_never_prompt_or_execute) ... ok
+test_process_switch_reaps_before_next_load (test_core.EngineAndMCPTests.test_process_switch_reaps_before_next_load) ... ok
+test_sse_done_stops (test_core.EngineAndMCPTests.test_sse_done_stops) ... ok
+test_sse_multiple_frames_and_final_eof (test_core.EngineAndMCPTests.test_sse_multiple_frames_and_final_eof) ... ok
+test_auth_session_and_csrf (test_core.FormatAndBoundaryTests.test_auth_session_and_csrf) ... ok
+test_bounded_result_remains_json (test_core.FormatAndBoundaryTests.test_bounded_result_remains_json) ... ok
+test_download_validation (test_core.FormatAndBoundaryTests.test_download_validation) ... ok
+test_exact_fork_alias_discovery_not_exec (test_core.FormatAndBoundaryTests.test_exact_fork_alias_discovery_not_exec) ... ok
+test_generic_call_requires_complete_whole_envelope (test_core.FormatAndBoundaryTests.test_generic_call_requires_complete_whole_envelope) ... ok
+test_generic_history_gemma_and_untrusted_results (test_core.FormatAndBoundaryTests.test_generic_history_gemma_and_untrusted_results) ... ok
+test_generic_rejects_malformed_and_ambiguous (test_core.FormatAndBoundaryTests.test_generic_rejects_malformed_and_ambiguous) ... ok
+test_mcp_environment_isolation_and_redaction (test_core.FormatAndBoundaryTests.test_mcp_environment_isolation_and_redaction) ... ok
+test_ollm_download_avoids_pickle_and_remote_code (test_core.FormatAndBoundaryTests.test_ollm_download_avoids_pickle_and_remote_code) ... ok
+test_package_validation (test_core.FormatAndBoundaryTests.test_package_validation) ... ok
+test_paths_block_escape_and_symlinks (test_core.FormatAndBoundaryTests.test_paths_block_escape_and_symlinks) ... ok
+test_remote_requires_operator_host_allowlist (test_core.FormatAndBoundaryTests.test_remote_requires_operator_host_allowlist) ... ok
+test_repository_filename_safety (test_core.FormatAndBoundaryTests.test_repository_filename_safety) ... ok
+test_sampling_limits (test_core.FormatAndBoundaryTests.test_sampling_limits) ... ok
+test_split_gguf_requires_every_shard (test_core.FormatAndBoundaryTests.test_split_gguf_requires_every_shard) ... ok
+test_strict_json_duplicate_and_nonfinite (test_core.FormatAndBoundaryTests.test_strict_json_duplicate_and_nonfinite) ... ok
+test_tool_alias_collision_and_length (test_core.FormatAndBoundaryTests.test_tool_alias_collision_and_length) ... ok
+test_approval_expires_without_execution (test_core.SchedulerTests.test_approval_expires_without_execution) ... ok
+test_approval_required_then_approved (test_core.SchedulerTests.test_approval_required_then_approved) ... ok
+test_cancel_approval_marks_it_cancelled (test_core.SchedulerTests.test_cancel_approval_marks_it_cancelled) ... ok
+test_cancel_running_reaps_process (test_core.SchedulerTests.test_cancel_running_reaps_process) ... ok
+test_cancellation_during_claim_publish_does_not_start_job (test_core.SchedulerTests.test_cancellation_during_claim_publish_does_not_start_job) ... ok
+test_duplicate_cancel_does_not_interrupt_cleanup (test_core.SchedulerTests.test_duplicate_cancel_does_not_interrupt_cleanup) ... ok
+test_failed_live_delivery_does_not_lose_persisted_job (test_core.SchedulerTests.test_failed_live_delivery_does_not_lose_persisted_job) ... ok
+test_lanes_are_independent_and_inference_serial (test_core.SchedulerTests.test_lanes_are_independent_and_inference_serial) ... ok
+test_output_replay_offsets_and_rounds (test_core.SchedulerTests.test_output_replay_offsets_and_rounds) ... ok
+test_shutdown_preserves_queue_and_interrupts_inflight (test_core.SchedulerTests.test_shutdown_preserves_queue_and_interrupts_inflight) ... ok
+test_worker_timeout (test_core.SchedulerTests.test_worker_timeout) ... ok
+test_chat_idempotency (test_core.ServiceTests.test_chat_idempotency) ... ok
+test_chat_rejects_unloaded_or_wrong_model (test_core.ServiceTests.test_chat_rejects_unloaded_or_wrong_model) ... ok
+test_model_selection_idempotency (test_core.ServiceTests.test_model_selection_idempotency) ... ok
+test_parallel_same_conversation_is_rejected (test_core.ServiceTests.test_parallel_same_conversation_is_rejected) ... ok
+test_registry_response_matches_frontend_contract (test_core.ServiceTests.test_registry_response_matches_frontend_contract) ... ok
+test_remote_secret_refs_export_without_plaintext (test_core.ServiceTests.test_remote_secret_refs_export_without_plaintext) ... ok
+test_select_then_background_chat_persists_result (test_core.ServiceTests.test_select_then_background_chat_persists_result) ... ok
+test_switch_cancels_queued_old_model_jobs (test_core.ServiceTests.test_switch_cancels_queued_old_model_jobs) ... ok
+test_http_auth_cookie_and_origin (test_integration.SocketIntegration.test_http_auth_cookie_and_origin) ... skipped 'python-socketio/aiohttp unavailable: real Socket.IO integration not run'
+test_invalid_socket_input_and_denied_auth (test_integration.SocketIntegration.test_invalid_socket_input_and_denied_auth) ... skipped 'python-socketio/aiohttp unavailable: real Socket.IO integration not run'
+test_websocket_submit_stream_disconnect_replay (test_integration.SocketIntegration.test_websocket_submit_stream_disconnect_replay) ... skipped 'python-socketio/aiohttp unavailable: real Socket.IO integration not run'
+test_body_under_limit_replays_unchanged (test_lifecycle.LifecycleTests.test_body_under_limit_replays_unchanged) ... ok
+test_chunked_body_limit_before_route_execution (test_lifecycle.LifecycleTests.test_chunked_body_limit_before_route_execution) ... ok
+test_owned_child_registration_and_cleanup (test_lifecycle.LifecycleTests.test_owned_child_registration_and_cleanup) ... ok
+test_recovery_does_not_kill_reused_pid (test_lifecycle.LifecycleTests.test_recovery_does_not_kill_reused_pid) ... ok
+
+----------------------------------------------------------------------
+Ran 62 tests in 6.443s
+
+OK (skipped=3)
